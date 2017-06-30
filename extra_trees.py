@@ -16,6 +16,15 @@ plot_colors = "byr"
 plot_step = 0.1
 label_names = ['0', '1', '2']
 
+# Test sur le nombre d'arguments
+if len(sys.argv) < 3 :
+    train_cwnd = 'cwnd.dat'
+    train_label = 'label.csv'
+    test_cwnd = 'cwndbis.csv'
+else :
+    train_cwnd = sys.argv[1]
+    train_label = sys.argv[2]
+    test_cwnd = sys.argv[3]
 
 # On charge les donnees d'entrainement
 df = pd.read_csv('cwnd.dat', delimiter = ';')

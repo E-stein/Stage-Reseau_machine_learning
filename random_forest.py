@@ -16,6 +16,7 @@ plot_colors = "byr"
 plot_step = 0.1
 label_names = ['0', '1', '2']
 
+# Test sur le nombre d'arguments
 if len(sys.argv) < 3 :
     train_cwnd = 'cwnd.dat'
     train_label = 'label.csv'
