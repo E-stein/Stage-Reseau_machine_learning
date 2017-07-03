@@ -25,7 +25,7 @@ else :
     train_cwnd = sys.argv[1]
     train_label = sys.argv[2]
     test_cwnd = sys.argv[3]
-    
+
 # On charge les donnees d'entrainement
 df = pd.read_csv('cwnd.dat', delimiter = ';')
 x = []
@@ -48,7 +48,7 @@ T = np.array(t)
 # Chargement des tableaux de tests et d'entrainements
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
 
-# Construit un arbre de decision avec les valeurs donnees -> entrainement
+# Construit une random forest avec les valeurs donnees -> entrainement
 clf = AdaBoostClassifier(n_estimators = 100)
 clf = clf.fit(X_train, y_train)
 

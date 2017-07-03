@@ -48,7 +48,7 @@ T = np.array(t)
 # Chargement des tableaux de tests et d'entrainements
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
 
-# Construit un arbre de decision avec les valeurs donnees -> entrainement
+# Construit une random forest avec les valeurs donnees -> entrainement
 clf = ExtraTreesClassifier(n_estimators = 100, max_features = 2,
       n_jobs = -1, min_samples_leaf = 110)
 clf = clf.fit(X_train, y_train)
