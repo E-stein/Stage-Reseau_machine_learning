@@ -46,7 +46,8 @@ for i in range(0,len(dp)):
 T = np.array(t)
 
 # Chargement des tableaux de tests et d'entrainements
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5,
+                                   random_state = 1, train_size = 0.25)
 
 # Construit une random forest avec les valeurs donnees -> entrainement
 clf = ExtraTreesClassifier(n_estimators = 100, max_features = 2,
