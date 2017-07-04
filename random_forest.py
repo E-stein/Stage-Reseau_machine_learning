@@ -49,7 +49,7 @@ clf = clf.fit(X_train, y_train)
 
 # Construction de la courbe ROC
 probas = clf.predict_proba(X_test)
-fpr, tpr, thresholds = metrics.roc_curve(y_test, probas[:,1], pos_label = 0)
+fpr, tpr, thresholds = metrics.roc_curve(y_test, probas[:,1], pos_label = False)
 roc_auc = auc(fpr, tpr)
 print ("Area under the ROC curve : %f" % roc_auc)
 
