@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.externals import joblib
 from sklearn.ensemble import AdaBoostClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from sklearn.metrics import roc_curve, auc
 from sklearn.cross_validation import train_test_split
+import os, sys
 
 
 # Parametres

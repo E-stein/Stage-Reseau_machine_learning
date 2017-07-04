@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.externals import joblib
 from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from sklearn.metrics import roc_curve, auc
 from sklearn.cross_validation import train_test_split
+import os, sys
 
 
 # Parametres
@@ -36,14 +36,6 @@ for i in range(0,len(df)/3):
     y.append(dp['label'].values[i])
 y = np.array(y)
 X = np.array(x)
-
-#On charge les donnees de tests
-dp = pd.read_csv('cwndbis.csv', delimiter = ',')
-t = []
-for i in range(0,len(dp)):
-    t.append([df['time'].values[i], df['cwnd'].values[i]])
-
-T = np.array(t)
 
 # Chargement des tableaux de tests et d'entrainements
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5,
