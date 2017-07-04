@@ -39,7 +39,6 @@ probas = clf.predict_proba(X_test)
 fpr, tpr, thresholds = metrics.roc_curve(y_test, probas[:,1], pos_label = 0)
 roc_auc = auc(fpr, tpr)
 print ("Area under the ROC curve : %f" % roc_auc)
-print(thresholds)
 
 #Enregistrement de l'entrainement dans un fichier
 joblib.dump(clf, 'model.pkl')
@@ -52,6 +51,17 @@ x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
 y_min, y_max = 0, X[:, 1].max() + 1
 xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
                      np.arange(y_min, y_max, plot_step))
+
+# Affichage de la courbe ROC
+plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], 'k--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.0])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic example')
+plt.legend(loc="lower right")
+plt.show()
 
 #Prediction -> l'algo essaye de predire quel point appartient a quelle classe
 Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
