@@ -51,6 +51,14 @@ y_min, y_max = 0, X[:, 1].max() + 1
 xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
                      np.arange(y_min, y_max, plot_step))
 
+#Prediction -> l'algo essaye de predire quel point appartient a quelle classe
+Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+"""
+Z est un tableau de tableau tq : Z[y][X] = label, avec un ecart
+de plot_step
+"""
+
 # Affichage de la courbe ROC
 plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
 plt.plot([0, 1], [0, 1], 'k--')
@@ -61,14 +69,6 @@ plt.ylabel('True Positive Rate')
 plt.title('Receiver operating characteristic example')
 plt.legend(loc="lower right")
 plt.show()
-
-#Prediction -> l'algo essaye de predire quel point appartient a quelle classe
-Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-Z = Z.reshape(xx.shape)
-"""
-Z est un tableau de tableau tq : Z[y][X] = label, avec un ecart
-de plot_step
-"""
 
 #contour -> met les labels predits (avec les couleurs) sur le graphe
 cs = plt.contourf(xx, yy, Z)

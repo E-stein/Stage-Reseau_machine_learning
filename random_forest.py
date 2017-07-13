@@ -8,6 +8,7 @@ from sklearn import metrics
 from sklearn.metrics import roc_curve, auc
 from sklearn.cross_validation import train_test_split
 import os, sys
+from sklearn.base import clone
 
 # Parametres
 n_classes = 3
@@ -16,21 +17,19 @@ plot_step = 0.1
 label_names = ['0', '1', '2']
 
 # Test sur le nombre d'arguments
-if len(sys.argv) < 3 :
+if len(sys.argv) < 2 :
     train_cwnd = 'cwnd.dat'
     train_label = 'label.csv'
-    test_cwnd = 'cwndbis.csv'
 else :
     train_cwnd = sys.argv[1]
     train_label = sys.argv[2]
-    test_cwnd = sys.argv[3]
 
 # On charge les donnees d'entrainement
 df = pd.read_csv(train_cwnd, delimiter = ';')
 x = []
 y = []
 dp= pd.read_csv(train_label)
-for i in range(0,len(df)/2):
+for i in range(0,len(df)):
     x.append([df['time'].values[i], df['cwnd'].values[i]])
     y.append(dp['label'].values[i])
 
@@ -38,8 +37,8 @@ y = np.array(y)
 X = np.array(x)
 
 # Chargement des tableaux de tests et d'entrainements
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5,
-                                   random_state = 1, train_size = 0.25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = 0.5,
+                                   test_size = 0.25, random_state = 0)
 
 # Construit une random forest avec les valeurs donnees -> entrainement
 clf = RandomForestClassifier(n_estimators = 100, max_features = 2,

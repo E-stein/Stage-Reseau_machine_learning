@@ -9,7 +9,6 @@ from sklearn.metrics import roc_curve, auc
 from sklearn.cross_validation import train_test_split
 import os, sys
 
-
 # Parametres
 n_classes = 3
 plot_colors = "byr"
@@ -37,17 +36,9 @@ for i in range(0,len(df)/3):
 y = np.array(y)
 X = np.array(x)
 
-#On charge les donnees de tests
-dp = pd.read_csv('cwndbis.csv', delimiter = ',')
-t = []
-for i in range(0,len(dp)):
-    t.append([df['time'].values[i], df['cwnd'].values[i]])
-
-T = np.array(t)
-
 # Chargement des tableaux de tests et d'entrainements
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5,
-                                   random_state = 1, train_size = 0.25)
+                                   random_state = 0, train_size = 0.25)
 
 # Construit une random forest avec les valeurs donnees -> entrainement
 clf = AdaBoostClassifier(n_estimators = 100)
@@ -79,7 +70,6 @@ Z = Z.reshape(xx.shape)
 Z est un tableau de tableau tq : Z[y][X] = label, avec un ecart
 de plot_step
 """
-
 # Affichage de la courbe ROC
 plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
 plt.plot([0, 1], [0, 1], 'k--')
