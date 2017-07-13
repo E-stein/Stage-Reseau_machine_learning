@@ -29,7 +29,7 @@ df = pd.read_csv(train_cwnd, delimiter = ';')
 x = []
 y = []
 dp= pd.read_csv(train_label)
-for i in range(0,len(df)):
+for i in range(0,len(df)/3):
     x.append([df['time'].values[i], df['cwnd'].values[i]])
     y.append(dp['label'].values[i])
 
